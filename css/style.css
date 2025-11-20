@@ -1,0 +1,634 @@
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: "Indie Flower", cursive;
+  background-color: #22211f;
+  color: #ffffff;
+  font-size: 120%;
+}
+
+.off-screen-menu {
+  background: linear-gradient(to left, #686b35, #ced18f);
+  height: 100vh;
+  width: 100%;
+  max-width: 300px;
+  position: fixed;
+  top: 0;
+  left: -500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 3rem;
+  transition: 0.3s ease;
+}
+
+.off-screen-menu a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.off-screen-menu a:hover {
+  color: #eaff8a;
+}
+
+.off-screen-menu.active {
+  left: 0;
+}
+
+.ham-menu {
+  height: 50px;
+  width: 50px;
+  margin-left: auto;
+  position: relative;
+  display: block;
+}
+
+.ham-menu span {
+  height: 5px;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: 0.3s ease;
+}
+
+.ham-menu:hover span {
+  background-color: #eaff8a;
+}
+
+.ham-menu span:nth-child(1) {
+  top: 25%;
+}
+
+.ham-menu span:nth-child(3) {
+  top: 75%;
+}
+
+.ham-menu.active span:nth-child(1) {
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.ham-menu.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.ham-menu.active span:nth-child(3) {
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+header nav {
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to left, #686b35, #ced18f);
+  border-radius: 20px;
+  transition: 0.5s ease-in-out;
+  display: none;
+  position: relative;
+  font-size: 2rem;
+  flex-wrap: wrap;
+}
+
+header nav a {
+  background: none;
+  text-decoration: none;
+  color: #ffffff;
+  padding: 10px 70px;
+}
+
+header nav a:hover {
+  color: #eaff8a;
+}
+
+section {
+  scroll-margin-top: 100px;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  transition: 0.5s ease-in-out;
+  gap: 30px;
+}
+
+.home-content h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 250%;
+}
+
+.home-content p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 150%;
+}
+
+.home-image {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-image img {
+  height: 400px;
+  width: 400px;
+  border-radius: 500px;
+  max-width: 100%;
+  height: auto;
+  flex-wrap: wrap;
+  margin-bottom: 100%;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.home-image img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+}
+
+.outfit-images {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.outfit-images img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 20px;
+  max-width: 100%;
+  height: auto;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.outfit-images img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+}
+
+.aboutme {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 20px;
+  margin-top: 50px;
+}
+
+.aboutme-text {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+}
+
+.aboutme h1 {
+  font-size: 250%;
+}
+
+.aboutme p {
+  font-size: 150%;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to left, #686b35, #ced18f);
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+  margin-top: 50px;
+}
+
+.footer-content {
+  font-size: 150%;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 150%;
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.social-icons a {
+  color: white;
+  margin: 5px;
+}
+
+.social-icons a:hover span {
+  color: #eaff8a;
+}
+.form-section {
+  padding: 80px 20px;
+  text-align: center;
+  background-color: #0c0c0c;
+  margin-top: 50px;
+}
+
+.form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: #ffffff;
+  color: #000000;
+  padding: 30px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 1.2rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: #ffffff;
+  font-family: "Indie Flower", cursive;
+  font-size: 1rem;
+}
+
+.form-group textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+.submit-btn {
+  background-color: #000000;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 10px;
+  font-family: "Indie Flower", cursive;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.delete-btn {
+  background-color: #471126;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: "Indie Flower", cursive;
+  transition: background 0.3s ease;
+}
+
+.delete-btn:hover {
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+}
+
+@media (min-width: 768px) {
+  header nav {
+    display: flex;
+  }
+
+  .ham-menu {
+    display: none;
+  }
+
+  .home {
+    flex-direction: row;
+    text-align: left;
+    gap: 50px;
+  }
+
+  .home-content h1 {
+    margin-top: 0;
+    font-size: 3rem;
+  }
+
+  .home-image img {
+    margin-bottom: 0;
+  }
+
+  .aboutme {
+    flex-direction: row;
+    gap: 50px;
+  }
+
+  .outfit-images img {
+    width: 250px;
+    height: 250px;
+  }
+}
+
+.nav-container nav a {
+  position: relative;
+  overflow: hidden;
+}
+
+a,
+button,
+input,
+textarea {
+  transition: all 0.3s ease;
+}
+
+.stories-section {
+  padding: 80px 20px;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: #22211f;
+}
+
+.stories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.story-card {
+  background-color: #92965e;
+  padding: 25px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  transition: all 0.4s ease;
+  border: 1px solid #ffffff;
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+}
+
+.story-card h3 {
+  color: #ffffff;
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+  border-bottom: 2px solid #ffffff;
+  padding-bottom: 10px;
+}
+
+.story-description {
+  color: #e0e0e0;
+  margin-bottom: 15px;
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+.story-author {
+  color: #22211f;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.delete-story-btn {
+  background-color: #ffffff;
+  color: #22211f;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: "Indie Flower", cursive;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  margin-top: 15px;
+}
+
+.delete-story-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+}
+
+.contact-section {
+  padding: 80px 20px;
+  text-align: center;
+  background-color: #22211f;
+}
+
+.add-story-section {
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.no-stories {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px;
+  color: #ffffff;
+  font-size: 1.2rem;
+}
+
+@media (max-width: 480px) {
+  header nav a {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+  }
+
+  .home {
+    padding: 40px 10px;
+  }
+
+  .home-content h1 {
+    font-size: 1.8rem;
+    margin-top: 30px;
+  }
+
+  .home-content p {
+    font-size: 1rem;
+  }
+
+  .home-image img {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 40px;
+  }
+
+  .outfit-images img {
+    width: 100%;
+    height: auto;
+  }
+
+  .aboutme {
+    padding: 50px 20px;
+  }
+
+  .aboutme-text h1 {
+    font-size: 2rem;
+  }
+
+  .aboutme-text p {
+    font-size: 1rem;
+  }
+
+  .aboutme img {
+    width: 200px;
+    height: 200px;
+  }
+
+  .footer-content {
+    font-size: 1rem;
+  }
+
+  .social-icons {
+    font-size: 1.2rem;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+  header nav a {
+    padding: 10px 40px;
+    font-size: 1.5rem;
+  }
+
+  .home {
+    padding: 60px 20px;
+    gap: 40px;
+  }
+
+  .home-content h1 {
+    font-size: 2.5rem;
+    margin-top: 0;
+  }
+
+  .home-content p {
+    font-size: 1.3rem;
+  }
+
+  .home-image img {
+    width: 300px;
+    height: 300px;
+    margin-bottom: 20px;
+  }
+
+  .outfit-images {
+    gap: 25px;
+  }
+
+  .outfit-images img {
+    width: 220px;
+    height: 220px;
+  }
+
+  .aboutme {
+    padding: 70px 30px;
+    gap: 40px;
+  }
+
+  .aboutme h2 {
+    font-size: 2.2rem;
+  }
+
+  .aboutme p {
+    font-size: 1.3rem;
+  }
+
+  .stories-section {
+    padding: 70px 25px;
+  }
+
+  .stories-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .story-card {
+    padding: 20px;
+  }
+
+  .contact-section,
+  .add-story-section {
+    padding: 70px 25px;
+  }
+
+  .form-container {
+    max-width: 500px;
+    padding: 25px;
+  }
+
+  .footer-content {
+    font-size: 1.3rem;
+  }
+
+  .social-icons {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .stories-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .story-card {
+    padding: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .home-content h1 {
+    font-size: 4rem;
+  }
+
+  .outfit-images img {
+    width: 280px;
+    height: 280px;
+  }
+}

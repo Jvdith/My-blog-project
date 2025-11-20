@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Judith's Blog</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="off-screen-menu"></div>
+      <div class="ham-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="nav-container">
+        <nav>
+          <a href="#home">Home</a>
+          <a href="#outfit">Outfits</a>
+          <a href="#stories">Stories</a>
+          <a href="#aboutme">About Me</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <section id="home" class="home">
+      <div class="home-content">
+        <h1>Hello! Welcome to my Blog</h1>
+        <p>A place to show the things I like and share stories!</p>
+      </div>
+      <div class="home-image">
+        <img src="img/cat.png" alt="Cat" />
+      </div>
+    </section>
+
+    <section id="outfit">
+      <div class="outfit-images">
+        <img src="img/f1.jpg" alt="Outfit 1" />
+        <img src="img/f2.jpg" alt="Outfit 2" />
+        <img src="img/f3.jpg" alt="Outfit 3" />
+        <img src="img/f4.jpg" alt="Outfit 4" />
+        <img src="img/f5.jpg" alt="Outfit 5" />
+        <img src="img/f6.jpg" alt="Outfit 6" />
+        <img src="img/f7.jpg" alt="Outfit 7" />
+        <img src="img/f8.jpg" alt="Outfit 8" />
+        <img src="img/f9.jpg" alt="Outfit 9" />
+        <img src="img/f10.jpg" alt="Outfit 10" />
+      </div>
+    </section>
+
+    <section id="stories" class="stories-section">
+      <h2>Stories</h2>
+      <div class="stories-grid" id="storiesContainer"></div>
+    </section>
+
+    <section class="add-story-section">
+      <div class="form-container">
+        <h2>Share Your Story</h2>
+        <form id="storyForm">
+          <div class="form-group">
+            <label for="storyTitle">Story Title:</label>
+            <input
+              type="text"
+              id="storyTitle"
+              name="storyTitle"
+              placeholder="Give your story a title"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="storyAuthor">Your Name:</label>
+            <input
+              type="text"
+              id="storyAuthor"
+              name="storyAuthor"
+              placeholder="How should we call you?"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="storyDescription">Your Story:</label>
+            <textarea
+              id="storyDescription"
+              name="storyDescription"
+              placeholder="Share your story."
+            ></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Share Story</button>
+        </form>
+      </div>
+    </section>
+
+    <section id="aboutme" class="aboutme">
+      <div class="aboutme-text">
+        <h2>About Me</h2>
+        <p>
+          I'm Judith, a cross-platform app development student based in Las
+          Palmas de Gran Canaria. This is my first web development project.
+        </p>
+      </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+      <div class="form-container">
+        <h2>Contact Me</h2>
+        <form id="contactForm">
+          <div class="form-group">
+            <label for="contactName">Your Name:</label>
+            <input
+              type="text"
+              id="contactName"
+              name="contactName"
+              placeholder="Enter your full name"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="contactEmail">Your Email:</label>
+            <input
+              type="email"
+              id="contactEmail"
+              name="contactEmail"
+              placeholder="Enter your email"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="contactSubject">Subject:</label>
+            <select id="contactSubject" name="contactSubject">
+              <option value="">Why are you contacting me?</option>
+              <option value="collaboration">Collaboration Proposal</option>
+              <option value="advice">Fashion Advice</option>
+              <option value="question">General Question</option>
+              <option value="feedback">Website Feedback</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="contactMessage">Your Message:</label>
+            <textarea
+              id="contactMessage"
+              name="contactMessage"
+              placeholder="Tell me what's on your mind..."
+            ></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <p>2025 Judith's Blog - All rights reserved</p>
+      </div>
+      <div class="social-icons">
+        <a href="https://github.com" aria-label="GitHub">
+          <span class="fab fa-github"></span>
+        </a>
+        <a href="https://instagram.com" aria-label="Instagram">
+          <span class="fab fa-instagram"></span>
+        </a>
+        <a href="https://pinterest.com" aria-label="Pinterest">
+          <span class="fab fa-pinterest"></span>
+        </a>
+      </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/form-validation.js"></script>
+    <script src="js/stories-crud.js"></script>
+  </body>
+</html>
