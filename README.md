@@ -32,11 +32,6 @@ Form validation for contact and story submission.
 
 Local storage implementation for persistent data.
 
-## Pages
-
-- **Home Page** (index.html) - Main blog with outfits, about me, stories, and contact sections
--
-
 ## Technologies Used
 
 - HTML5
