@@ -1,6 +1,6 @@
 # My First Blog
 
-This is my **first website project**, created as a part of my cross-platform app development studies using **Html**, **CSS** and **JavaScript**. It showcases my interests and has an **contact me** and **submit stories** section.
+This is my **first website project**, created as a part of my cross-platform app development studies using **Html**, **CSS** and **JavaScript**.
 
 ## Features
 
@@ -12,7 +12,7 @@ This is my **first website project**, created as a part of my cross-platform app
 
 **Hover Effects** on images.
 
-**Social Media Icons** using **Font Awesome** for Github, Instagram and Pinterest.
+**Social Media Icons** using **Font Awesome**.
 
 **Smooth Scrolling** to each section of the page.
 
@@ -21,6 +21,8 @@ This is my **first website project**, created as a part of my cross-platform app
 **Contact Form** with real-time validation.
 
 **CRUD Functionality** for managing stories.
+
+**Parallax Scrolling Effects** With a black cat peeking it's head out in a clover field at night.
 
 ### JavaScript Functionality
 

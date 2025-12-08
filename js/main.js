@@ -1,22 +1,20 @@
-const IMAGE_PATH = "img/";
+const ham_menu = document.querySelector(".ham-menu");
+const off_screen_menu = document.querySelector(".off-screen-menu");
+const nav_links = document.querySelectorAll("nav a");
 
-const hamMenu = document.querySelector(".ham-menu");
-const offScreenMenu = document.querySelector(".off-screen-menu");
-const navLinks = document.querySelectorAll("nav a");
-
-navLinks.forEach((link) => {
+nav_links.forEach((link) => {
   const clone = link.cloneNode(true);
-  offScreenMenu.appendChild(clone);
+  off_screen_menu.appendChild(clone);
 });
 
-hamMenu.addEventListener("click", () => {
-  hamMenu.classList.toggle("active");
-  offScreenMenu.classList.toggle("active");
+ham_menu.addEventListener("click", () => {
+  ham_menu.classList.toggle("active");
+  off_screen_menu.classList.toggle("active");
 });
 
-offScreenMenu.addEventListener("click", (e) => {
+off_screen_menu.addEventListener("click", (e) => {
   if (e.target.tagName === "A") {
-    hamMenu.classList.remove("active");
-    offScreenMenu.classList.remove("active");
+    ham_menu.classList.remove("active");
+    off_screen_menu.classList.remove("active");
   }
 });

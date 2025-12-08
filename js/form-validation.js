@@ -1,22 +1,22 @@
 class ContactFormValidator {
-  constructor(formId) {
-    this.form = document.getElementById(formId);
+  constructor(form_id) {
+    this.form = document.getElementById(form_id);
     this.fields = {
-      contactName: {
+      "contact-name": {
         element: document.getElementById("contactName"),
-        validate: this.validateName.bind(this),
+        validate: this.validate_name.bind(this),
       },
-      contactEmail: {
+      "contact-email": {
         element: document.getElementById("contactEmail"),
-        validate: this.validateEmail.bind(this),
+        validate: this.validate_email.bind(this),
       },
-      contactSubject: {
+      "contact-subject": {
         element: document.getElementById("contactSubject"),
-        validate: this.validateSubject.bind(this),
+        validate: this.validate_subject.bind(this),
       },
-      contactMessage: {
+      "contact-message": {
         element: document.getElementById("contactMessage"),
-        validate: this.validateMessage.bind(this),
+        validate: this.validate_message.bind(this),
       },
     };
 
@@ -25,197 +25,188 @@ class ContactFormValidator {
 
   init() {
     if (this.form) {
-      this.addRealTimeValidation();
-      this.form.addEventListener("submit", this.handleSubmit.bind(this));
+      this.add_real_time_validation();
+      this.form.addEventListener("submit", this.handle_submit.bind(this));
     }
   }
 
-  addRealTimeValidation() {
-    Object.keys(this.fields).forEach((fieldName) => {
-      const field = this.fields[fieldName];
+  add_real_time_validation() {
+    Object.keys(this.fields).forEach((field_name) => {
+      const field = this.fields[field_name];
 
       field.element.addEventListener("blur", () => {
-        this.validateField(fieldName);
+        this.validate_field(field_name);
       });
 
       field.element.addEventListener("input", () => {
-        this.clearFieldError(fieldName);
+        this.clear_field_error(field_name);
       });
     });
   }
 
-  validateField(fieldName) {
-    const field = this.fields[fieldName];
-    const value = field.element.value.trim();
-    const isValid = field.validate(value);
+  handle_submit(e) {
+    e.preventDefault();
+    if (this.validate_all()) {
+      this.clear_all_fields();
+      this.show_form_success();
+    } else {
+      this.show_form_error(
+        "Please correct the errors in the form before submitting."
+      );
+    }
+  }
 
-    if (!isValid.valid) {
-      this.showFieldError(fieldName, isValid.message);
+  validate_name(name) {
+    if (name.trim().length < 2) {
+      return "Name must be at least 2 characters.";
+    }
+    return null;
+  }
+
+  validate_email(email) {
+    const email_regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email_regex.test(email)) {
+      return "Please enter a valid email address.";
+    }
+    return null;
+  }
+
+  validate_subject(subject) {
+    if (subject.trim().length < 5) {
+      return "Subject must be at least 5 characters.";
+    }
+    return null;
+  }
+
+  validate_message(message) {
+    if (message.trim().length < 10) {
+      return "Message must be at least 10 characters.";
+    }
+    return null;
+  }
+
+  validate_field(field_name) {
+    const field = this.fields[field_name];
+    const value = field.element.value;
+    const error_message = field.validate(value);
+    const error_element = document.getElementById(`${field_name}-error`);
+
+    if (error_message) {
+      this.show_field_error(field_name, error_message);
       return false;
     } else {
-      this.showFieldSuccess(fieldName);
+      this.clear_field_error(field_name);
+      this.show_field_success(field_name);
       return true;
     }
   }
 
-  validateName(name) {
-    if (name.length === 0) {
-      return { valid: false, message: "Name is required" };
-    }
-    if (name.length < 2) {
-      return {
-        valid: false,
-        message: "Name must be at least 2 characters long",
-      };
-    }
-    if (name.length > 50) {
-      return { valid: false, message: "Name cannot exceed 50 characters" };
-    }
-    if (!/^[a-zA-Z\s]+$/.test(name)) {
-      return {
-        valid: false,
-        message: "Name can only contain letters and spaces",
-      };
-    }
-    return { valid: true };
+  validate_all() {
+    let is_valid = true;
+    Object.keys(this.fields).forEach((field_name) => {
+      if (!this.validate_field(field_name)) {
+        is_valid = false;
+      }
+    });
+    return is_valid;
   }
 
-  validateEmail(email) {
-    if (email.length === 0) {
-      return { valid: false, message: "Email is required" };
+  clear_all_fields() {
+    Object.keys(this.fields).forEach((field_name) => {
+      const field = this.fields[field_name];
+      field.element.value = "";
+      this.clear_field_error(field_name);
+      field.element.style.border = "2px solid rgba(255, 255, 255, 0.2)";
+      field.element.style.background = "rgba(255, 255, 255, 0.05)";
+    });
+    const existing_message = document.querySelector(".form-message");
+    if (existing_message) {
+      existing_message.remove();
     }
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return { valid: false, message: "Please enter a valid email address" };
-    }
-    return { valid: true };
   }
 
-  validateSubject(subject) {
-    if (subject.length === 0) {
-      return { valid: false, message: "Please select a subject" };
-    }
-    return { valid: true };
-  }
+  show_field_error(field_name, message) {
+    const field = this.fields[field_name];
+    let error_element = document.getElementById(`${field_name}-error`);
 
-  validateMessage(message) {
-    if (message.length === 0) {
-      return { valid: false, message: "Message is required" };
+    if (!error_element) {
+      error_element = document.createElement("div");
+      error_element.id = `${field_name}-error`;
+      error_element.className = "error-message";
+      field.element.parentNode.insertBefore(
+        error_element,
+        field.element.nextSibling
+      );
     }
-    if (message.length < 10) {
-      return {
-        valid: false,
-        message: "Message must be at least 10 characters long",
-      };
-    }
-    if (message.length > 500) {
-      return { valid: false, message: "Message cannot exceed 500 characters" };
-    }
-    return { valid: true };
-  }
 
-  showFieldError(fieldName, message) {
-    this.clearFieldError(fieldName);
-
-    const field = this.fields[fieldName];
-    const errorElement = document.createElement("div");
-    errorElement.className = "error-message";
-    errorElement.style.cssText = `
-      color: #ff6b6b;
-      font-size: 0.9rem;
-      margin-top: 5px;
-      padding: 5px 10px;
-      background: rgba(255, 107, 107, 0.1);
-      border-radius: 5px;
-      border-left: 3px solid #ff6b6b;
-    `;
-    errorElement.textContent = message;
-
-    field.element.parentNode.appendChild(errorElement);
+    error_element.innerHTML = message;
     field.element.style.border = "2px solid #ff6b6b";
     field.element.style.background = "rgba(255, 107, 107, 0.05)";
+    error_element.style.display = "block";
   }
 
-  showFieldSuccess(fieldName) {
-    const field = this.fields[fieldName];
+  clear_field_error(field_name) {
+    const field = this.fields[field_name];
+    const error_element = document.getElementById(`${field_name}-error`);
+
+    if (error_element) {
+      error_element.style.display = "none";
+    }
+    field.element.style.border = "2px solid rgba(255, 255, 255, 0.2)";
+    field.element.style.background = "rgba(255, 255, 255, 0.05)";
+    this.clear_form_message();
+  }
+
+  show_field_success(field_name) {
+    const field = this.fields[field_name];
     field.element.style.border = "2px solid #4CAF50";
     field.element.style.background = "rgba(76, 175, 80, 0.05)";
   }
 
-  clearFieldError(fieldName) {
-    const field = this.fields[fieldName];
-    const existingError =
-      field.element.parentNode.querySelector(".error-message");
-    if (existingError) {
-      existingError.remove();
+  clear_form_message() {
+    const existing_message = document.querySelector(".form-message");
+    if (existing_message) {
+      existing_message.remove();
     }
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
+  show_form_success() {
+    const form_container = this.form.closest(".form-container");
+    const message_element = document.createElement("div");
+    message_element.className = "form-message success";
+    message_element.style.cssText = `
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: bold;
+      background: rgba(76, 175, 80, 0.2);
+      color: #4CAF50;
+      border: 2px solid #4CAF50;
+    `;
+    message_element.innerHTML =
+      "Thank you! Your message has been sent successfully.";
+    form_container.insertBefore(message_element, this.form.nextSibling);
 
-    let isFormValid = true;
-
-    Object.keys(this.fields).forEach((fieldName) => {
-      const isValid = this.validateField(fieldName);
-      if (!isValid) {
-        isFormValid = false;
-      }
-    });
-
-    if (isFormValid) {
-      this.submitContactForm();
-    } else {
-      this.showFormError(
-        "Please correct the errors before sending your message"
-      );
-    }
-
-    return false;
-  }
-
-  submitContactForm() {
-    const formData = {
-      name: this.fields.contactName.element.value.trim(),
-      email: this.fields.contactEmail.element.value.trim(),
-      subject: this.fields.contactSubject.element.value,
-      message: this.fields.contactMessage.element.value.trim(),
-    };
-
-    const submitBtn = this.form.querySelector(".submit-btn");
-    const originalText = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-    submitBtn.disabled = true;
-
-    setTimeout(() => {
-      this.showSuccessMessage();
-      this.form.reset();
-
-      submitBtn.innerHTML = originalText;
-      submitBtn.disabled = false;
-    }, 2000);
-  }
-
-  showSuccessMessage() {
-    this.showMessage(
+    this.show_message(
       "Thank you! Your message has been sent successfully.",
       "success"
     );
   }
 
-  showFormError(message) {
-    this.showMessage(message, "error");
+  show_form_error(message) {
+    this.show_message(message, "error");
   }
 
-  showMessage(message, type) {
-    const existingMessage = document.querySelector(".form-message");
-    if (existingMessage) {
-      existingMessage.remove();
+  show_message(message, type) {
+    const existing_message = document.querySelector(".form-message");
+    if (existing_message) {
+      existing_message.remove();
     }
 
-    const messageElement = document.createElement("div");
-    messageElement.className = `form-message ${type}`;
-    messageElement.style.cssText = `
+    const message_element = document.createElement("div");
+    message_element.className = `form-message ${type}`;
+    message_element.style.cssText = `
       padding: 15px;
       margin: 20px 0;
       border-radius: 10px;
@@ -225,26 +216,20 @@ class ContactFormValidator {
     `;
 
     if (type === "success") {
-      messageElement.style.background = "rgba(76, 175, 80, 0.2)";
-      messageElement.style.color = "#4CAF50";
-      messageElement.style.border = "2px solid #4CAF50";
+      message_element.style.background = "rgba(76, 175, 80, 0.2)";
+      message_element.style.color = "#4CAF50";
+      message_element.style.border = "2px solid #4CAF50";
     } else {
-      messageElement.style.background = "rgba(255, 107, 107, 0.2)";
-      messageElement.style.color = "#ff6b6b";
-      messageElement.style.border = "2px solid #ff6b6b";
+      message_element.style.background = "rgba(255, 107, 107, 0.2)";
+      message_element.style.color = "#ff6b6b";
+      message_element.style.border = "2px solid #ff6b6b";
     }
 
-    messageElement.textContent = message;
-    this.form.insertBefore(messageElement, this.form.firstChild);
-
-    setTimeout(() => {
-      if (messageElement.parentNode) {
-        messageElement.remove();
-      }
-    }, 5000);
+    message_element.innerHTML = message;
+    this.form.parentNode.insertBefore(message_element, this.form);
   }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  window.contactFormValidator = new ContactFormValidator("contactForm");
+document.addEventListener("DOMContentLoaded", () => {
+  new ContactFormValidator("contactForm");
 });
